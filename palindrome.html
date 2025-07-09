@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Universal Palindrome Checker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+    <h1 class="text-2xl font-bold text-blue-700 mb-4">Universal Palindrome Checker</h1>
+    <input type="text" id="inputString" placeholder="Enter letters, numbers or both" class="w-full p-2 border border-gray-300 rounded mb-4" />
+    <button onclick="checkPalindrome()" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded w-full">
+      Check
+    </button>
+    <p id="result" class="mt-4 text-lg font-semibold text-gray-700"></p>
+  </div>
+
+  <script>
+    function checkPalindrome() {
+      const str = document.getElementById("inputString").value;
+      const cleaned = str.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+      const reversed = cleaned.split("").reverse().join("");
+
+      const result = document.getElementById("result");
+      if (cleaned === "") {
+        result.textContent = "Please enter a valid input.";
+        result.classList.remove("text-green-600");
+        result.classList.add("text-red-600");
+      } else if (cleaned === reversed) {
+        result.textContent = `"${str}" is a Palindrome ✅`;
+        result.classList.remove("text-red-600");
+        result.classList.add("text-green-600");
+      } else {
+        result.textContent = `"${str}" is NOT a Palindrome ❌`;
+        result.classList.remove("text-green-600");
+        result.classList.add("text-red-600");
+      }
+    }
+  </script>
+</body>
+</html>
